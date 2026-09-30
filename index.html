@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f766e">
+
+  <title>السنوسي | منصة تحفيظ القرآن الكريم</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f7faf9;
+      color: #17332f;
+      line-height: 1.8;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid #e4eeeb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: bold;
+      color: #0f766e;
+    }
+
+    .logo span {
+      color: #17332f;
+      font-size: 12px;
+      display: block;
+      line-height: 1;
+      font-weight: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #405954;
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      color: #0f766e;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 17px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .btn-primary {
+      background: #0f766e;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0b625b;
+    }
+
+    .btn-outline {
+      background: white;
+      color: #0f766e;
+      border: 1px solid #0f766e;
+    }
+
+    .btn-outline:hover {
+      background: #effaf8;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 90px 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(15,118,110,.09), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(180,140,70,.08), transparent 30%),
+        #fbfdfc;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 1.25;
+      color: #123d36;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #0f766e;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #60736e;
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 20px 50px rgba(15,118,110,.09);
+      border: 1px solid #e7f0ee;
+      text-align: center;
+    }
+
+    .quran-icon {
+      width: 100px;
+      height: 100px;
+      margin: auto auto 20px;
+      border-radius: 30px;
+      background: #effaf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+    }
+
+    .hero-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* Sections */
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      color: #153f38;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #71827e;
+    }
+
+    /* Services */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      border: 1px solid #e6efed;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.05);
+    }
+
+    .card-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 15px;
+      background: #effaf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      margin-bottom: 17px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: #17453d;
+    }
+
+    .card p {
+      color: #71827e;
+      font-size: 14px;
+    }
+
+    /* Quran */
+    .quran-preview {
+      background: #123d36;
+      color: white;
+      border-radius: 25px;
+      padding: 45px;
+      text-align: center;
+    }
+
+    .quran-preview h2 {
+      margin-bottom: 10px;
+    }
+
+    .quran-preview p {
+      color: #cfe5e1;
+      margin-bottom: 25px;
+    }
+
+    .ayah {
+      font-size: 24px;
+      line-height: 2.2;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    /* Teachers */
+    .teachers-empty {
+      background: white;
+      border: 1px dashed #cbdcd8;
+      border-radius: 18px;
+      padding: 40px;
+      text-align: center;
+      color: #71827e;
+    }
+
+    /* Dedication */
+    .dedication {
+      background: #f1f8f6;
+    }
+
+    .dedication-box {
+      background: white;
+      max-width: 800px;
+      margin: auto;
+      padding: 45px;
+      text-align: center;
+      border-radius: 25px;
+      border: 1px solid #e0ece9;
+    }
+
+    .dedication-box h2 {
+      color: #0f766e;
+      margin-bottom: 20px;
+    }
+
+    .names {
+      font-size: 20px;
+      line-height: 2.2;
+      margin: 20px 0;
+      color: #34534c;
+    }
+
+    /* Footer */
+    footer {
+      background: #102f2b;
+      color: #d5e5e1;
+      padding: 35px 0;
+      text-align: center;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(480px, 100%);
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      left: 18px;
+      border: none;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+      color: #687c76;
+    }
+
+    .modal-box h2 {
+      color: #123d36;
+      margin-bottom: 8px;
+    }
+
+    .modal-box > p {
+      color: #71827e;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #3d5751;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1px solid #d7e4e1;
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+      background: #fbfdfc;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #0f766e;
+    }
+
+    .role-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .role-option {
+      border: 1px solid #d7e4e1;
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .role-option.active {
+      border-color: #0f766e;
+      background: #effaf8;
+      color: #0f766e;
+    }
+
+    .teacher-fields {
+      display: none;
+    }
+
+    .teacher-fields.show {
+      display: block;
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #687c76;
+    }
+
+    .switch-link button {
+      background: none;
+      border: none;
+      color: #0f766e;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #173f38;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 12px;
+      display: none;
+      z-index: 2000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media(max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media(max-width: 550px) {
+      .header-buttons .btn-outline {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .hero-card {
+        padding: 25px;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+
+      .quran-preview {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+
+    <a href="index.html" class="logo">
+      السنوسي
+      <span>منصة لتحفيظ القرآن الكريم</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#quran">القرآن</a>
+      <a href="#teachers">المحفظون</a>
+      <a href="#adhkar">الأذكار</a>
+      <a href="#dedication">الإهداء</a>
+    </nav>
+
+    <div class="header-buttons">
+      <button class="btn btn-outline" onclick="openLogin()">تسجيل الدخول</button>
+      <button class="btn btn-primary" onclick="openRegister()">إنشاء حساب</button>
+    </div>
+
+  </div>
+</header>
+
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div>
+        <h1>
+          احفظ كتاب الله
+          <br>
+          <span>خطوة بخطوة</span>
+        </h1>
+
+        <p>
+          السنوسي منصة تساعدك على تنظيم رحلة حفظ القرآن الكريم،
+          والتواصل مع المحفظين، ومتابعة تقدمك في الحفظ والمراجعة.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="openRegister()">
+            ابدأ رحلة الحفظ
+          </button>
+
+          <a href="#quran" class="btn btn-outline">
+            تصفح القرآن
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="quran-icon">📖</div>
+        <h3>وَقُلْ رَبِّ زِدْنِي عِلْمًا</h3>
+        <p>
+          رحلة طويلة تبدأ بآية، ثم آية، حتى يكرمك الله بحفظ كتابه.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Services -->
+  <section>
+    <div class="container">
+
+      <div class="section-title">
+        <h2>كل ما تحتاجه في رحلة الحفظ</h2>
+        <p>منصة واحدة لتنظيم ومتابعة رحلتك مع القرآن</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>القرآن الكريم</h3>
+          <p>
+            قراءة واستماع للقرآن الكريم من خلال مصادر موثوقة،
+            مع إمكانية تطوير أدوات الحفظ والمراجعة.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">👨‍🏫</div>
+          <h3>المحفظون</h3>
+          <p>
+            ابحث عن المحفظين النشطين وأرسل طلبًا للانضمام
+            إلى حلقة تحفيظ ومتابعة مستواك.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>متابعة الحفظ</h3>
+          <p>
+            سجل ما تم حفظه ومراجعته وتابع تقدمك
+            في رحلة حفظ القرآن الكريم.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤲</div>
+          <h3>الأذكار</h3>
+          <p>
+            الوصول إلى مجموعة من الأذكار والأدعية
+            التي تساعدك على الاستمرار.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📝</div>
+          <h3>خطط الحفظ</h3>
+          <p>
+            تنظيم خطة مناسبة للحفظ والمراجعة
+            حسب وقتك ومستواك.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔔</div>
+          <h3>التذكير</h3>
+          <p>
+            تذكيرات تساعدك على عدم الانقطاع
+            والاستمرار في وردك اليومي.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Quran -->
+  <section id="quran">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>مع القرآن</h2>
+        <p>ابدأ يومك بآيات من كتاب الله</p>
+      </div>
+
+      <div class="quran-preview">
+
+        <h2>﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴾</h2>
+
+        <p>
+          يمكنك من خلال المنصة الوصول إلى قسم القرآن
+          والاستماع والقراءة في الإصدارات القادمة.
+        </p>
+
+        <div class="ayah">
+          ﴿ إِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾
+        </div>
+
+        <button class="btn btn-primary" onclick="showToast('قسم القرآن سيتم تفعيله قريبًا')">
+          دخول قسم القرآن
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Teachers -->
+  <section id="teachers">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>المحفظون</h2>
+        <p>المحفظون النشطون على منصة السنوسي</p>
+      </div>
+
+      <div class="teachers-empty">
+        <h3>👨‍🏫</h3>
+        <p>
+          سيتم عرض المحفظين النشطين هنا قريبًا.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          style="margin-top:15px"
+          onclick="openRegister()"
+        >
+          انضم إلى المنصة
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Adhkar -->
+  <section id="adhkar">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>وردك اليومي</h2>
+        <p>اجعل لك نصيبًا من القرآن والذكر كل يوم</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>ورد القرآن</h3>
+          <p>
+            اجعل لك وردًا ثابتًا من كتاب الله،
+            ولو كان قليلًا، فالاستمرار هو المقصود.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤲</div>
+          <h3>أذكار الصباح والمساء</h3>
+          <p>
+            سيتم توفير قسم متكامل للأذكار والأدعية داخل المنصة.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">❤️</div>
+          <h3>الاستمرار</h3>
+          <p>
+            لا تجعل انقطاع يوم سببًا لترك الطريق،
+            ابدأ من جديد دائمًا.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Dedication -->
+  <section class="dedication" id="dedication">
+
+    <div class="container">
+
+      <div class="dedication-box">
+
+        <h2>إهداء ودعاء</h2>
+
+        <p>
+          هذا العمل إهداء لروح:
+        </p>
+
+        <div class="names">
+          محمد جلال<br>
+          هدى محمد<br>
+          سنوسي محمد<br>
+          حاملينها عبد العظيم
+        </div>
+
+        <p>
+          نسأل الله أن يرحمهم ويغفر لهم،
+          وأن يجعل هذا العمل صدقة جارية عنهم،
+          وأن ينفع به كل من استخدمه في حفظ كتاب الله.
+        </p>
+
+        <br>
+
+        <p>
+          <strong>
+            نرجو منكم ألا تنسونا من صالح دعائكم.
+          </strong>
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="container">
+    <p>
+      <strong>السنوسي</strong>
+      — منصة لتحفيظ القرآن الكريم
+    </p>
+
+    <p style="font-size:13px;margin-top:5px">
+      نسأل الله أن يجعل هذا العمل خالصًا لوجهه الكريم.
+    </p>
+  </div>
+</footer>
+
+
+<!-- Dedication Popup -->
+<div class="modal" id="dedicationModal">
+
+  <div class="modal-box" style="text-align:center">
+
+    <button class="close" onclick="closeModal('dedicationModal')">
+      ×
+    </button>
+
+    <div style="font-size:45px;margin-bottom:10px">🤲</div>
+
+    <h2>دعاء</h2>
+
+    <p>
+      قبل أن تبدأ رحلتك معنا، نسألكم الدعاء بالرحمة والمغفرة لمن أُهدي
+      إليهم هذا العمل.
+    </p>
+
+    <div class="names" style="font-size:17px">
+      محمد جلال<br>
+      هدى محمد<br>
+      سنوسي محمد<br>
+      حاملينها عبد العظيم
+    </div>
+
+    <button
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="closeModal('dedicationModal')"
+    >
+      اللهم ارحمهم واغفر لهم
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeModal('loginModal')">×</button>
+
+    <h2>تسجيل الدخول</h2>
+
+    <p>ادخل إلى حسابك في منصة السنوسي.</p>
+
+    <form id="loginForm">
+
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input
+          type="email"
+          id="loginEmail"
+          required
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input
+          type="password"
+          id="loginPassword"
+          required
+          autocomplete="current-password"
+        >
+      </div>
+
+      <button class="btn btn-primary" style="width:100%" type="submit">
+        دخول
+      </button>
+
+    </form>
+
+    <div class="switch-link">
+      ليس لديك حساب؟
+      <button onclick="switchToRegister()">إنشاء حساب</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Register Modal -->
+<div class="modal" id="registerModal">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeModal('registerModal')">×</button>
+
+    <h2>إنشاء حساب</h2>
+
+    <p>اختر نوع الحساب وابدأ استخدام المنصة.</p>
+
+    <form id="registerForm">
+
+      <div class="form-group">
+        <label>نوع الحساب</label>
+
+        <div class="role-box">
+
+          <div
+            class="role-option active"
+            id="studentRole"
+            onclick="selectRole('student')"
+          >
+            👨‍🎓
+            <br>
+            طالب حفظ
+          </div>
+
+          <div
+            class="role-option"
+            id="teacherRole"
+            onclick="selectRole('teacher')"
+          >
+            👨‍🏫
+            <br>
+            محفظ
+          </div>
+
+        </div>
+
+        <input type="hidden" id="registerRole" value="student">
+      </div>
+
+
+      <div class="form-group">
+        <label>الاسم</label>
+
+        <input
+          type="text"
+          id="registerName"
+          required
+          autocomplete="name"
+          placeholder="اكتب اسمك"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+
+        <input
+          type="email"
+          id="registerEmail"
+          required
+          autocomplete="email"
+          placeholder="example@email.com"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>كلمة المرور</label>
+
+        <input
+          type="password"
+          id="registerPassword"
+          required
+          minlength="6"
+          autocomplete="new-password"
+          placeholder="6 أحرف على الأقل"
+        >
+      </div>
+
+
+      <div id="teacherFields" class="teacher-fields">
+
+        <div class="form-group">
+          <label>رقم واتساب</label>
+
+          <input
+            type="tel"
+            id="teacherWhatsapp"
+            placeholder="مثال: 201xxxxxxxxx"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>نبذة عنك كمحفظ</label>
+
+          <textarea
+            id="teacherBio"
+            rows="3"
+            placeholder="اكتب نبذة بسيطة عن خبرتك وطريقة التحفيظ"
+          ></textarea>
+        </div>
+
+      </div>
+
+
+      <button class="btn btn-primary" style="width:100%" type="submit">
+        إنشاء الحساب
+      </button>
+
+    </form>
+
+
+    <div class="switch-link">
+      لديك حساب بالفعل؟
+      <button onclick="switchToLogin()">تسجيل الدخول</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<!-- Firebase -->
+<script type="module">
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+  /* =========================
+     Firebase Configuration
+  ========================= */
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDzgzxAkFfS2A9swQUshbw4pnOE-OKP16A",
+    authDomain: "al-sanousy-1e984.firebaseapp.com",
+    projectId: "al-sanousy-1e984",
+    storageBucket: "al-sanousy-1e984.firebasestorage.app",
+    messagingSenderId: "68411151065",
+    appId: "1:68411151065:web:f000d8aa38c2fd9ef8a4c8"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+
+  /* =========================
+     Global Functions
+  ========================= */
+
+  window.openLogin = function () {
+    closeModal("registerModal");
+    document.getElementById("loginModal").classList.add("active");
+  };
+
+
+  window.openRegister = function () {
+    closeModal("loginModal");
+    document.getElementById("registerModal").classList.add("active");
+  };
+
+
+  window.closeModal = function (id) {
+    document.getElementById(id).classList.remove("active");
+  };
+
+
+  window.switchToRegister = function () {
+    closeModal("loginModal");
+    openRegister();
+  };
+
+
+  window.switchToLogin = function () {
+    closeModal("registerModal");
+    openLogin();
+  };
+
+
+  window.showToast = function (message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  };
+
+
+  window.selectRole = function (role) {
+
+    document.getElementById("registerRole").value = role;
+
+    const student = document.getElementById("studentRole");
+    const teacher = document.getElementById("teacherRole");
+
+    const fields = document.getElementById("teacherFields");
+
+    student.classList.remove("active");
+    teacher.classList.remove("active");
+
+    if (role === "student") {
+
+      student.classList.add("active");
+
+      fields.classList.remove("show");
+
+    } else {
+
+      teacher.classList.add("active");
+
+      fields.classList.add("show");
+
+    }
+  };
+
+
+  /* =========================
+     Dedication Popup
+  ========================= */
+
+  function showDedicationPopup() {
+
+    const shown = localStorage.getItem("alSanousyDedicationShown");
+
+    if (!shown) {
+
+      setTimeout(() => {
+
+        document
+          .getElementById("dedicationModal")
+          .classList.add("active");
+
+      }, 1000);
+
+      localStorage.setItem(
+        "alSanousyDedicationShown",
+        "true"
+      );
+    }
+  }
+
+
+  showDedicationPopup();
+
+
+  /* =========================
+     Register
+  ========================= */
+
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+      const name =
+        document.getElementById("registerName").value.trim();
+
+      const email =
+        document.getElementById("registerEmail").value.trim();
+
+      const password =
+        document.getElementById("registerPassword").value;
+
+      const role =
+        document.getElementById("registerRole").value;
+
+      const whatsapp =
+        document.getElementById("teacherWhatsapp").value.trim();
+
+      const bio =
+        document.getElementById("teacherBio").value.trim();
+
+
+      if (!name || !email || !password) {
+
+        showToast("من فضلك أكمل البيانات");
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        showToast("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
+
+        return;
+      }
+
+
+      try {
+
+        const userCredential =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user = userCredential.user;
+
+
+        await setDoc(
+          doc(db, "users", user.uid),
+          {
+
+            uid: user.uid,
+
+            name: name,
+
+            email: email,
+
+            role: role,
+
+            whatsapp:
+              role === "teacher"
+                ? whatsapp
+                : "",
+
+            bio:
+              role === "teacher"
+                ? bio
+                : "",
+
+            active:
+              role === "student",
+
+            createdAt:
+              serverTimestamp()
+          }
+        );
+
+
+        /*
+          إنشاء ملف المحفظ بشكل منفصل.
+          يبدأ inactive حتى تتم مراجعته واعتماده.
+        */
+
+        if (role === "teacher") {
+
+          await setDoc(
+            doc(db, "teacherProfiles", user.uid),
+            {
+
+              uid: user.uid,
+
+              name: name,
+
+              bio: bio,
+
+              active: false,
+
+              createdAt:
+                serverTimestamp()
+            }
+          );
+
+        }
+
+
+        showToast("تم إنشاء الحساب بنجاح");
+
+        setTimeout(() => {
+
+          window.location.href = "dashboard.html";
+
+        }, 800);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        let message =
+          "حدث خطأ أثناء إنشاء الحساب";
+
+        if (error.code === "auth/email-already-in-use") {
+
+          message =
+            "هذا البريد الإلكتروني مستخدم بالفعل";
+
+        } else if (
+          error.code === "auth/invalid-email"
+        ) {
+
+          message =
+            "البريد الإلكتروني غير صحيح";
+
+        } else if (
+          error.code === "auth/weak-password"
+        ) {
+
+          message =
+            "كلمة المرور ضعيفة";
+
+        }
+
+
+        showToast(message);
+      }
+
+    });
+
+
+  /* =========================
+     Login
+  ========================= */
+
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+
+      const email =
+        document.getElementById("loginEmail").value.trim();
+
+      const password =
+        document.getElementById("loginPassword").value;
+
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+        showToast("تم تسجيل الدخول بنجاح");
+
+
+        setTimeout(() => {
+
+          window.location.href =
+            "dashboard.html";
+
+        }, 600);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        let message =
+          "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+
+        if (error.code === "auth/user-not-found") {
+          message = "الحساب غير موجود";
+        }
+
+        if (error.code === "auth/wrong-password") {
+          message = "كلمة المرور غير صحيحة";
+        }
+
+        showToast(message);
+      }
+
+    });
+
+
+  /* =========================
+     Check Existing User
+  ========================= */
+
+  onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+      console.log(
+        "Logged in user:",
+        user.uid
+      );
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#0f766e">
+
+  <title>لوحة التحكم | السنوسي</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f9f8;
+      color: #17332f;
+      line-height: 1.7;
+    }
+
+
+    button {
+      font-family: inherit;
+    }
+
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+
+    /* Header */
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e1ece9;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+
+    .nav {
+      min-height: 70px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+
+    .logo {
+      color: #0f766e;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+
+    .logo span {
+      display: block;
+      font-size: 11px;
+      color: #73827e;
+      font-weight: normal;
+      line-height: 1;
+    }
+
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+
+    .user-name {
+      color: #405b55;
+      font-size: 14px;
+    }
+
+
+    .logout {
+      border: none;
+      background: #fff1f1;
+      color: #b42318;
+      padding: 8px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+
+    /* Main */
+
+    main {
+      padding: 45px 0 70px;
+    }
+
+
+    .welcome {
+      background: linear-gradient(
+        135deg,
+        #0f766e,
+        #155e57
+      );
+
+      color: white;
+
+      padding: 35px;
+
+      border-radius: 22px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .welcome h1 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+
+    .welcome p {
+      color: #d7efeb;
+    }
+
+
+    /* Stats */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 15px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .stat {
+      background: white;
+
+      border: 1px solid #e2ecea;
+
+      border-radius: 17px;
+
+      padding: 22px;
+
+      text-align: center;
+    }
+
+
+    .stat-icon {
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: bold;
+      color: #0f766e;
+    }
+
+
+    .stat-label {
+      color: #73827e;
+      font-size: 13px;
+    }
+
+
+    /* Grid */
+
+    .dashboard-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.4fr .6fr;
+
+      gap: 20px;
+    }
+
+
+    .box {
+      background: white;
+
+      border: 1px solid #e2ecea;
+
+      border-radius: 18px;
+
+      padding: 25px;
+
+      margin-bottom: 20px;
+    }
+
+
+    .box h2 {
+      color: #17453d;
+
+      font-size: 20px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .empty {
+      text-align: center;
+
+      color: #73827e;
+
+      padding: 30px 10px;
+    }
+
+
+    /* Quick actions */
+
+    .actions {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 10px;
+    }
+
+
+    .action {
+      border: 1px solid #dbe8e5;
+
+      background: #fbfdfc;
+
+      padding: 18px 10px;
+
+      border-radius: 13px;
+
+      cursor: pointer;
+
+      text-align: center;
+
+      color: #36554e;
+    }
+
+
+    .action:hover {
+      border-color: #0f766e;
+
+      background: #effaf8;
+
+      color: #0f766e;
+    }
+
+
+    .action-icon {
+      font-size: 25px;
+
+      display: block;
+
+      margin-bottom: 5px;
+    }
+
+
+    /* Plan */
+
+    .progress-container {
+      background: #e6efed;
+
+      height: 10px;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      margin: 15px 0;
+    }
+
+
+    .progress {
+      width: 0%;
+
+      height: 100%;
+
+      background: #0f766e;
+    }
+
+
+    .plan-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      color: #687b75;
+
+      font-size: 14px;
+    }
+
+
+    /* Request */
+
+    .request {
+      border: 1px solid #e1ebe9;
+
+      padding: 15px;
+
+      border-radius: 12px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .request-name {
+      font-weight: bold;
+
+      color: #17453d;
+    }
+
+
+    .request-status {
+      display: inline-block;
+
+      margin-top: 7px;
+
+      padding: 3px 9px;
+
+      background: #fff8df;
+
+      color: #8a6b00;
+
+      border-radius: 20px;
+
+      font-size: 12px;
+    }
+
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+
+      background: #102f2b;
+
+      color: #cfe0dc;
+
+      padding: 25px;
+
+      font-size: 13px;
+    }
+
+
+    /* Loading */
+
+    .loading {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(255,255,255,.94);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 1000;
+    }
+
+
+    .loading-box {
+      text-align: center;
+
+      color: #0f766e;
+    }
+
+
+    .spinner {
+      width: 42px;
+
+      height: 42px;
+
+      border: 4px solid #dceae7;
+
+      border-top-color: #0f766e;
+
+      border-radius: 50%;
+
+      animation: spin 1s linear infinite;
+
+      margin: auto auto 12px;
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    @media(max-width: 850px) {
+
+      .stats {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media(max-width: 550px) {
+
+      .user-name {
+        display: none;
+      }
+
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+
+      .welcome {
+        padding: 25px;
+      }
+
+
+      .welcome h1 {
+        font-size: 23px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- Loading -->
+
+<div class="loading" id="loading">
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <div>
+      جاري تحميل حسابك...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Header -->
+
+<header>
+
+  <div class="container nav">
+
+    <a href="index.html" class="logo">
+
+      السنوسي
+
+      <span>
+        منصة تحفيظ القرآن الكريم
+      </span>
+
+    </a>
+
+
+    <div class="user-area">
+
+      <div
+        class="user-name"
+        id="headerUserName"
+      >
+        ...
+      </div>
+
+      <button
+        class="logout"
+        id="logoutBtn"
+      >
+        تسجيل الخروج
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- Main -->
+
+<main>
+
+  <div class="container">
+
+
+    <!-- Welcome -->
+
+    <div class="welcome">
+
+      <h1 id="welcomeTitle">
+        السلام عليكم
+      </h1>
+
+      <p id="welcomeText">
+        مرحبًا بك في منصة السنوسي.
+      </p>
+
+    </div>
+
+
+    <!-- Student Dashboard -->
+
+    <div id="studentDashboard" style="display:none">
+
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📖
+          </div>
+
+          <div
+            class="stat-number"
+            id="studentPages"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            صفحات محفوظة
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🔄
+          </div>
+
+          <div
+            class="stat-number"
+            id="studentReview"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            صفحات مراجعة
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📅
+          </div>
+
+          <div
+            class="stat-number"
+            id="studentDays"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            أيام متتالية
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🎯
+          </div>
+
+          <div
+            class="stat-number"
+            id="studentProgress"
+          >
+            0%
+          </div>
+
+          <div class="stat-label">
+            نسبة الإنجاز
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+
+        <div>
+
+
+          <!-- Plan -->
+
+          <div class="box">
+
+            <h2>
+              📋 خطة الحفظ
+            </h2>
+
+            <div class="empty">
+
+              <p>
+                لم يتم إنشاء خطة حفظ حتى الآن.
+              </p>
+
+              <button
+                class="action"
+                style="margin-top:15px"
+                onclick="comingSoon()"
+              >
+                إنشاء خطة حفظ
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Teacher -->
+
+          <div class="box">
+
+            <h2>
+              👨‍🏫 المحفظ
+            </h2>
+
+            <div class="empty">
+
+              <p>
+                لم تنضم إلى محفظ حتى الآن.
+              </p>
+
+              <button
+                class="action"
+                style="margin-top:15px"
+                onclick="goToTeachers()"
+              >
+                البحث عن محفظ
+              </button>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div>
+
+          <div class="box">
+
+            <h2>
+              ⚡ اختصارات
+            </h2>
+
+
+            <div class="actions">
+
+              <button
+                class="action"
+                onclick="openQuran()"
+              >
+
+                <span class="action-icon">
+                  📖
+                </span>
+
+                القرآن
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  📝
+                </span>
+
+                تسجيل حفظ
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  🔄
+                </span>
+
+                المراجعة
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  🤲
+                </span>
+
+                الأذكار
+
+              </button>
+
+
+            </div>
+
+          </div>
+
+
+          <div class="box">
+
+            <h2>
+              💡 تذكير
+            </h2>
+
+            <p style="color:#667a74;font-size:14px">
+
+              لا تستهن بآية واحدة تحفظها اليوم.
+              القليل المستمر يصنع فرقًا كبيرًا مع الوقت.
+
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- Teacher Dashboard -->
+
+    <div id="teacherDashboard" style="display:none">
+
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            👨‍🎓
+          </div>
+
+          <div
+            class="stat-number"
+            id="teacherStudents"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            الطلاب
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📨
+          </div>
+
+          <div
+            class="stat-number"
+            id="teacherRequests"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            طلبات جديدة
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📋
+          </div>
+
+          <div class="stat-number">
+            0
+          </div>
+
+          <div class="stat-label">
+            جلسات التحفيظ
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🟢
+          </div>
+
+          <div
+            class="stat-number"
+            id="teacherActive"
+          >
+            -
+          </div>
+
+          <div class="stat-label">
+            حالة الحساب
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+
+        <div>
+
+
+          <div class="box">
+
+            <h2>
+              📨 طلبات التحفيظ
+            </h2>
+
+            <div id="requestsContainer">
+
+              <div class="empty">
+
+                لا توجد طلبات جديدة حاليًا.
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="box">
+
+            <h2>
+              👨‍🎓 طلابي
+            </h2>
+
+            <div class="empty">
+
+              سيتم عرض الطلاب المقبولين هنا.
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div>
+
+
+          <div class="box">
+
+            <h2>
+              ⚡ اختصارات
+            </h2>
+
+
+            <div class="actions">
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  👨‍🎓
+                </span>
+
+                الطلاب
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  📋
+                </span>
+
+                الخطط
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  📝
+                </span>
+
+                الجلسات
+
+              </button>
+
+
+              <button
+                class="action"
+                onclick="comingSoon()"
+              >
+
+                <span class="action-icon">
+                  ⚙️
+                </span>
+
+                الملف الشخصي
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="box">
+
+            <h2>
+              ℹ️ حالة المحفظ
+            </h2>
+
+            <p
+              id="teacherStatusText"
+              style="color:#687b75;font-size:14px"
+            >
+              جاري التحقق من حالة الحساب...
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <p>
+    <strong>السنوسي</strong>
+    — منصة لتحفيظ القرآن الكريم
+  </p>
+
+</footer>
+
+
+<!-- Firebase -->
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+  import {
+    getFirestore,
+    doc,
+    getDoc
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+  /* =========================
+     Firebase Configuration
+  ========================= */
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDzgzxAkFfS2A9swQUshbw4pnOE-OKP16A",
+
+    authDomain:
+      "al-sanousy-1e984.firebaseapp.com",
+
+    projectId:
+      "al-sanousy-1e984",
+
+    storageBucket:
+      "al-sanousy-1e984.firebasestorage.app",
+
+    messagingSenderId:
+      "68411151065",
+
+    appId:
+      "1:68411151065:web:f000d8aa38c2fd9ef8a4c8"
+
+  };
+
+
+  const app =
+    initializeApp(firebaseConfig);
+
+
+  const auth =
+    getAuth(app);
+
+
+  const db =
+    getFirestore(app);
+
+
+  /* =========================
+     Elements
+  ========================= */
+
+  const loading =
+    document.getElementById("loading");
+
+  const studentDashboard =
+    document.getElementById("studentDashboard");
+
+  const teacherDashboard =
+    document.getElementById("teacherDashboard");
+
+  const headerUserName =
+    document.getElementById("headerUserName");
+
+  const welcomeTitle =
+    document.getElementById("welcomeTitle");
+
+  const welcomeText =
+    document.getElementById("welcomeText");
+
+
+  /* =========================
+     Helpers
+  ========================= */
+
+  window.comingSoon = function () {
+
+    alert(
+      "هذه الخاصية سيتم تطويرها في الخطوة القادمة بإذن الله."
+    );
+
+  };
+
+
+  window.goToTeachers = function () {
+
+    /*
+      سيتم إنشاء teachers.html
+      في المرحلة التالية.
+    */
+
+    window.location.href =
+      "teachers.html";
+
+  };
+
+
+  window.openQuran = function () {
+
+    /*
+      سيتم إنشاء قسم القرآن
+      في المرحلة القادمة.
+    */
+
+    window.location.href =
+      "quran.html";
+
+  };
+
+
+  /* =========================
+     Logout
+  ========================= */
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async () => {
+
+      try {
+
+        await signOut(auth);
+
+        window.location.href =
+          "index.html";
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "حدث خطأ أثناء تسجيل الخروج."
+        );
+
+      }
+
+    });
+
+
+  /* =========================
+     Auth State
+  ========================= */
+
+  onAuthStateChanged(
+    auth,
+    async (user) => {
+
+      if (!user) {
+
+        window.location.href =
+          "index.html";
+
+        return;
+      }
+
+
+      try {
+
+        const userRef =
+          doc(db, "users", user.uid);
+
+
+        const userSnap =
+          await getDoc(userRef);
+
+
+        if (!userSnap.exists()) {
+
+          alert(
+            "لم يتم العثور على بيانات الحساب."
+          );
+
+          await signOut(auth);
+
+          window.location.href =
+            "index.html";
+
+          return;
+        }
+
+
+        const data =
+          userSnap.data();
+
+
+        const name =
+          data.name ||
+          user.displayName ||
+          "مستخدم";
+
+
+        const role =
+          data.role;
+
+
+        headerUserName.textContent =
+          name;
+
+
+        if (role === "student") {
+
+          loadStudentDashboard(
+            name
+          );
+
+        } else if (role === "teacher") {
+
+          loadTeacherDashboard(
+            name,
+            data
+          );
+
+        } else {
+
+          alert(
+            "نوع الحساب غير معروف."
+          );
+
+          await signOut(auth);
+
+          window.location.href =
+            "index.html";
+
+          return;
+
+        }
+
+
+        loading.style.display =
+          "none";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "حدث خطأ أثناء تحميل الحساب."
+        );
+
+        loading.style.display =
+          "none";
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     Student
+  ========================= */
+
+  function loadStudentDashboard(name) {
+
+    studentDashboard.style.display =
+      "block";
+
+
+    teacherDashboard.style.display =
+      "none";
+
+
+    welcomeTitle.textContent =
+      "أهلًا بك يا " + name;
+
+
+    welcomeText.textContent =
+      "نسأل الله أن يفتح عليك في حفظ كتابه، ويعينك على الاستمرار.";
+
+
+    /*
+      القيم الحالية مؤقتة.
+      سيتم ربطها ببيانات Firestore
+      في مرحلة متابعة الحفظ.
+    */
+
+    document
+      .getElementById("studentPages")
+      .textContent = "0";
+
+
+    document
+      .getElementById("studentReview")
+      .textContent = "0";
+
+
+    document
+      .getElementById("studentDays")
+      .textContent = "0";
+
+
+    document
+      .getElementById("studentProgress")
+      .textContent = "0%";
+
+  }
+
+
+  /* =========================
+     Teacher
+  ========================= */
+
+  function loadTeacherDashboard(
+    name,
+    data
+  ) {
+
+    studentDashboard.style.display =
+      "none";
+
+
+    teacherDashboard.style.display =
+      "block";
+
+
+    welcomeTitle.textContent =
+      "أهلًا بك يا " + name;
+
+
+    welcomeText.textContent =
+      "نسأل الله أن يجعلك سببًا في تعليم كتابه ونشر الخير.";
+
+
+    const active =
+      data.active === true;
+
+
+    document
+      .getElementById("teacherActive")
+      .textContent =
+        active
+          ? "نشط"
+          : "مراجعة";
+
+
+    const statusText =
+      document.getElementById(
+        "teacherStatusText"
+      );
+
+
+    if (active) {
+
+      statusText.textContent =
+        "حسابك كمحفظ نشط ويمكن للطلاب العثور عليك عند تفعيل ملفك.";
+
+    } else {
+
+      statusText.textContent =
+        "حسابك كمحفظ في انتظار المراجعة والاعتماد من إدارة المنصة.";
+
+    }
+
+  }
+
+</script>
+
+
+</body>
+
+</html>
